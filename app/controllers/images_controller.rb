@@ -11,10 +11,24 @@ class ImagesController < ApplicationController
      @image = Image.new
   end
 
+  def edit
+    @image =Image.find(params[:id])
+  end
+
+  def update
+    @image = Image.find(params[:id])
+      if @image.update_attributes(image_params)
+        redirect_to "/images/#{@image.id}"
+      else
+        render :edit
+      end
+    end
+  
+
 
   def create
     # make a new picture with what picture_params returns (which is a method we're calling)
-    @image = Image.new(images_params)
+    @image = Image.new(image_params)
     if @image.save
       # if the save for the picture was successful, go to index.html.erb
       redirect_to images_url
@@ -25,7 +39,7 @@ class ImagesController < ApplicationController
   end
 
   private
-  def images_params
+  def image_params
     params.require(:image).permit(:artist, :title, :url)
   end
 end
