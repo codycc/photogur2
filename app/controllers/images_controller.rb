@@ -23,7 +23,13 @@ class ImagesController < ApplicationController
         render :edit
       end
     end
-  
+
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    redirect_to images_url
+  end
+
 
 
   def create
