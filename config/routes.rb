@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'images' => 'images#index'
+  
   post 'images' => 'images#create'
   get 'images/new' => 'images#new'
 
